@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 	https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.sivalabs</groupId>
+    <groupId>com.kailaslabs</groupId>
     <artifactId>spring-boot-microservices-course</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -32,7 +32,36 @@
                     <mavenVersion>3.9.9</mavenVersion>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>2.44.0</version>
+                <executions>
+                    <execution>
+                        <id>spotless</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                            <goal>apply</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <java>
+                        <googleJavaFormat>
+                            <style>GOOGLE</style> <!-- or AOSP -->
+                        </googleJavaFormat>
 
+                        <!-- Optional: remove unused imports -->
+                        <removeUnusedImports/>
+
+                        <!-- Optional: customize import order -->
+                        <importOrder>
+                            <order>java,javax,org,com</order>
+                        </importOrder>
+                    </java>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
