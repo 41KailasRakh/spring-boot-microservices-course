@@ -20,6 +20,7 @@ class ProductController {
   PagedResult<Product> getProducts(@RequestParam(name = "page", defaultValue = "1") int pageNo) {
     return productService.getProducts(pageNo);
   }
+
   @GetMapping("/{code}")
   Product getProductByCode(@PathVariable String code) {
     return productService.getProductByCode(code);
