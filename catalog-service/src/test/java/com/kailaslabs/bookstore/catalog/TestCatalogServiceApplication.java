@@ -1,4 +1,4 @@
-package com.kailaslabs.catalogservice;
+package com.kailaslabs.bookstore.catalog;
 
 import org.springframework.boot.SpringApplication;
 
