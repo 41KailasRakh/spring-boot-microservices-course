@@ -38,6 +38,7 @@
 		<spotless-maven-plugin.version>2.44.4</spotless-maven-plugin.version>
 		<dockerImageName>sivaprasadreddy/bookstore-${project.artifactId}</dockerImageName>
 		<dockerImage>41kailasrakh/bookstore-${project.artifactId}</dockerImage>
+		<instancio.version>5.4.1</instancio.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -75,8 +76,25 @@
 			<artifactId>flyway-core</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.instancio</groupId>
+			<artifactId>instancio-junit</artifactId>
+			<version>${instancio.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-database-postgresql</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
