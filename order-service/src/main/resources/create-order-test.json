@@ -1,0 +1,23 @@
+{
+  "customer":{
+    "name":"Kailas",
+    "email":"kailas@email.com",
+    "phone":"8484848484"
+  },
+  "deliveryAddress":{
+    "addressLine1":"Nande",
+    "addressLine2":"MG Road",
+    "city":"Pune",
+    "state":"Maharashtra",
+    "zipCode":"412115",
+    "country":"India"
+  },
+  "items":[
+    {
+      "code":"P100",
+      "name":"Product 1",
+      "price":"25.50",
+      "quantity":"1"
+    }
+  ]
+}
