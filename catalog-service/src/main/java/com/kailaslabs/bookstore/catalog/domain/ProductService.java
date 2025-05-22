@@ -1,5 +1,7 @@
 package com.kailaslabs.bookstore.catalog.domain;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -8,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kailaslabs.bookstore.catalog.ApplicationProperties;
-import com.kailaslabs.bookstore.catalog.web.controller.exception.ProductNotFoundException;
 
 @Service
 @Transactional
@@ -40,11 +41,7 @@ public class ProductService {
         productsPage.hasPrevious());
   }
 
-  public Product getProductByCode(String code) {
-    return productRepository
-        .findByCode(code)
-        .map(ProductMapper::toProduct)
-        .orElseThrow(
-            () -> new ProductNotFoundException("Product with code " + code + " not found"));
+  public Optional<Product> getProductByCode(String code) {
+    return productRepository.findByCode(code).map(ProductMapper::toProduct);
   }
 }

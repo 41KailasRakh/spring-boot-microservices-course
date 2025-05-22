@@ -1,15 +1,16 @@
 package com.kailaslabs.bookstore.orders.controllers;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.notNullValue;
+
 import com.kailaslabs.bookstore.orders.AbstractIT;
 import com.kailaslabs.bookstore.orders.testdata.TestDataFactory;
 import io.restassured.http.ContentType;
+import java.math.BigDecimal;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.jdbc.Sql;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.notNullValue;
 
 @Sql("/test-orders.sql")
 class OrdersControllerTests extends AbstractIT {
@@ -18,6 +19,7 @@ class OrdersControllerTests extends AbstractIT {
     class CreateOrderTests {
         @Test
         void shouldCreateOrderSuccessfully() {
+            mockGetProductByCode("P100", "Product-1", new BigDecimal("25.50"));
             var payload =
                     """
                                 {
