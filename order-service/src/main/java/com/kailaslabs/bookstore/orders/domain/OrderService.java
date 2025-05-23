@@ -1,10 +1,8 @@
 package com.kailaslabs.bookstore.orders.domain;
 
-import com.kailaslabs.bookstore.orders.domain.models.CreateOrderRequest;
-import com.kailaslabs.bookstore.orders.domain.models.CreateOrderResponse;
-import com.kailaslabs.bookstore.orders.domain.models.OrderCreatedEvent;
-import com.kailaslabs.bookstore.orders.domain.models.OrderStatus;
+import com.kailaslabs.bookstore.orders.domain.models.*;
 import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -36,6 +34,18 @@ public class OrderService {
         OrderCreatedEvent orderCreatedEvent = OrderEventMapper.buildOrderCreatedEvent(savedOrder);
         orderEventService.save(orderCreatedEvent);
         return new CreateOrderResponse(savedOrder.getOrderNumber());
+    }
+
+    public List<OrderSummary> findOrders(String userName) {
+        log.info("orderRepository Retrieving orders for userName= {}", userName);
+        return orderRepository.findByUserName(userName);
+    }
+
+    public Optional<OrderDTO> findUserOrder(String userName, String orderNumber) {
+        log.info("orderRepository Retrieving order for userName= {}", userName);
+        return orderRepository
+                .findByUserNameAndOrderNumber(userName, orderNumber)
+                .map(OrderMapper::convertToDTO);
     }
 
     public void processNewOrders() {
