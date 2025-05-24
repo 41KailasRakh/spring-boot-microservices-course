@@ -42,6 +42,6 @@ jobs:
         name: Build and Push Docker Image
         run: |
           ./mvnw spring-boot:build-image -DskipTests
-          docker tag 41kailasrakh/bookstore-catalog-service ${{ secrets.DOCKERHUB_USERNAME }}/bookstore-catalog-service
+          docker tag 41kailasrakh/api-gateway ${{ secrets.DOCKERHUB_USERNAME }}/api-gateway
           echo "Pushing the image $DOCKER_IMAGE_NAME to Docker Hub..."
           docker push $DOCKER_IMAGE_NAME
