@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 class SchedulerConfig {
     @Bean
     public LockProvider lockProvider(DataSource dataSource) {
+
         return new JdbcTemplateLockProvider(JdbcTemplateLockProvider.Configuration.builder()
                 .withJdbcTemplate(new JdbcTemplate(dataSource))
                 .usingDbTime()
