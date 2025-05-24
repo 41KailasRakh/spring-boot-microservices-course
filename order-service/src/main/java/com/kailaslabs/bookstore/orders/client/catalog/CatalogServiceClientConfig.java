@@ -1,7 +1,9 @@
 package com.kailaslabs.bookstore.orders.client.catalog;
 
 import com.kailaslabs.bookstore.orders.ApplicationProperties;
+
 import java.time.Duration;
+
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
