@@ -32,7 +32,7 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     CreateOrderResponse createOrder(@Valid @RequestBody CreateOrderRequest createOrderRequest) {
         String userName = securityService.getLoginUserName();
-        log.info("Creating order for user {}", userName);
+        log.info(" Creating order for user {}", userName);
         return orderService.createOrder(userName, createOrderRequest);
     }
 
