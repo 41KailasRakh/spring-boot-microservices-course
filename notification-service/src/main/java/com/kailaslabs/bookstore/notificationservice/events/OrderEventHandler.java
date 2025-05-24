@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class OrderEventHandler {
     private static final Logger log = LoggerFactory.getLogger(OrderEventHandler.class);
-
     private final NotificationService notificationService;
     private final OrderEventRepository orderEventRepository;
 
