@@ -1,10 +1,7 @@
 package com.sivalabs.bookstore.webapp.web.controllers;
 
-import com.sivalabs.bookstore.webapp.clients.orders.CreateOrderRequest;
-import com.sivalabs.bookstore.webapp.clients.orders.OrderConfirmationDTO;
-import com.sivalabs.bookstore.webapp.clients.orders.OrderDTO;
-import com.sivalabs.bookstore.webapp.clients.orders.OrderServiceClient;
-import com.sivalabs.bookstore.webapp.clients.orders.OrderSummary;
+import com.sivalabs.bookstore.webapp.clients.orders.*;
+import com.sivalabs.bookstore.webapp.services.SecurityHelper;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -12,19 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 class OrderController {
     private static final Logger log = LoggerFactory.getLogger(OrderController.class);
     private final OrderServiceClient orderServiceClient;
+    private final SecurityHelper securityHelper;
 
-    OrderController(OrderServiceClient orderServiceClient) {
+    OrderController(OrderServiceClient orderServiceClient, SecurityHelper securityHelper) {
         this.orderServiceClient = orderServiceClient;
+        this.securityHelper = securityHelper;
     }
 
     @GetMapping("/cart")
@@ -65,6 +60,7 @@ class OrderController {
     }
 
     private Map<String, ?> getHeaders() {
-        return Map.of("Authorization", "Bearer " + "Bearer");
+        String accessToken = securityHelper.getAccessToken();
+        return Map.of("Authorization", "Bearer " + accessToken);
     }
 }

@@ -23,12 +23,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(OrderController.class)
-public class OrderControllerUnitTests {
-
+class OrderControllerUnitTests {
     @MockitoBean
     private OrderService orderService;
 
@@ -43,14 +43,14 @@ public class OrderControllerUnitTests {
 
     @BeforeEach
     void setUp() {
-        given(securityService.getLoginUserName()).willReturn("Kailas");
+        given(securityService.getLoginUserName()).willReturn("siva");
     }
 
     @ParameterizedTest(name = "[{index}]-{0}")
     @MethodSource("createOrderRequestProvider")
+    @WithMockUser
     void shouldReturnBadRequestWhenOrderPayloadIsInvalid(CreateOrderRequest request) throws Exception {
-        System.out.println("CreateOrderRequest: " + request);
-        given(orderService.createOrder(eq("Kailas"), any(CreateOrderRequest.class)))
+        given(orderService.createOrder(eq("siva"), any(CreateOrderRequest.class)))
                 .willReturn(null);
 
         mockMvc.perform(post("/api/orders")
